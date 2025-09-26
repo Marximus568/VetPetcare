@@ -1,7 +1,11 @@
 ﻿using System.Globalization;
 using VetPetcare.Models;
 
-var inventory = new List<Patient>();
+var patients = new List<Patient>();
+
+var pets = new List<Pet>();
+
+var patientsAndPets = new Dictionary<object, object>();
 
 //Controller of cycle
 var control = true;
@@ -11,10 +15,12 @@ do
 {
     Console.WriteLine("==========================");
     Console.WriteLine("Choose an option:");
-    Console.WriteLine("1 Register of patient.");
+    Console.WriteLine("1 Register for patient.");
     Console.WriteLine("2 Show patients.");
     Console.WriteLine("3 Find patient.");
-    Console.WriteLine("4 Leave.");
+    Console.WriteLine("4. Register for pet.");
+    Console.WriteLine("5 Show pets.");
+    Console.WriteLine("6. Leave.");
     var options=Console.ReadLine();
     Console.WriteLine("==========================");
     switch (options)
@@ -23,8 +29,9 @@ do
         {
             try
             {
-                ServicePatient.CreatePatient(inventory);
-                break;
+                ServicePatient.CreatePatient(patients);
+                patientsAndPets.Add(patients, patients);
+               break;
             }
             catch (Exception e)
             {
@@ -35,14 +42,14 @@ do
         }   
         case "2":
         {
-            if (inventory.Count == 0)
+            if (patients.Count == 0)
             {
                 Console.WriteLine("Doesn't have any patients.");
                 break;
             }
             else
             {   
-                ServicePatient.ShowList(inventory);
+                ServicePatient.ShowList(patients);
                 break;
             }
         }
@@ -51,15 +58,16 @@ do
         {
             try
             {
-                if (inventory.Count == 0)
+                if (patients.Count == 0)
                 {
                     Console.WriteLine("Doesn't have any patients.");
                 }
                 else
                 {
+                    Console.WriteLine("Write the name of the patient:");
                     string name = Console.ReadLine();
-                    ServicePatient.FindPatient(name,inventory);
-                    if (ServicePatient.FindPatient(name,inventory) == null)
+                    ServicePatient.FindPatient(name,patients);
+                    if (ServicePatient.FindPatient(name,patients) == null)
                     {
                         Console.WriteLine("Patient not found.");
                     }
@@ -72,8 +80,28 @@ do
                 break;
             }
         }
-
         case "4":
+        {
+            try
+            {
+                ServicePet.CreatePet(pets);
+                patientsAndPets.Add(patients, pets);
+                break;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                Console.WriteLine("Something went wrong.");
+                break;
+            }
+        } 
+            
+        case "5":
+        {
+            ServicePet.ShowList(pets);
+            break;
+        }
+        case "6":
         {
             Console.WriteLine("Thanks for use the application.");
             control = false;

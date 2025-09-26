@@ -3,22 +3,22 @@ namespace VetPetcare.Models;
 public static class ServicePatient
 {
         //Find a patient
-        public static string FindPatient(string name, List<Patient> inventory)
+        public static string FindPatient(string name, List<Patient> item)
         {
-            foreach (var p in inventory)
+            foreach (var p in item)
             {
-                if (name == p.name)
+                if (name == p.Name)
                 {
                     Console.WriteLine("Patient found");
-                    Console.WriteLine($"name: {p.name}, age: {p.age}, syphtoms: {p.symptoms}");
+                    Console.WriteLine($"name: {p.Name}, age: {p.Age}, syphtoms: {p.Symptoms}");
                 }
             }
 
-            return name;
+            return "Don't found";
         }
 
         // Create new patient
-        public static void CreatePatient(List<Patient> inventory)
+        public static void CreatePatient(List<Patient> item)
         {
             try
             {
@@ -40,7 +40,8 @@ public static class ServicePatient
 
                 Console.WriteLine("Enter your symptoms");
                 string symptoms = Console.ReadLine();
-                inventory.Add(new Patient(name, age, symptoms));
+                item.Add(new Patient(name, age, symptoms));
+                Console.WriteLine($"Yours id is {} ");
                 Console.WriteLine("Patient created.");
             }
             catch (Exception e)
@@ -52,13 +53,12 @@ public static class ServicePatient
         }
 
         //Read the list
-        public static void ShowList(List<Patient> inventory)
+        public static void ShowList(List<Patient> item)
         {
             Console.WriteLine("The following patients are available:");
-            foreach (var p in inventory)
+            foreach (var p in item)
             {
-                Console.WriteLine($"{p.name}, {p.age} años, {p.symptoms} symptoms");
-
+                Console.WriteLine($"ID: {p.Id} NAME:{p.Name}, AGE:{p.Age}, SYMPTOMS{p.Symptoms}");
             }
         }
 }

@@ -1,15 +1,17 @@
 public class Patient
 {
-    public Guid id { get; set; }
-    public string name { get; set; }
-    public int age { get; set; }
-    public string symptoms { get; set; }
-    public Patient(string name, int age, string symptoms)
+    public static int Id = 1;
+    public int PatientId { get; set; }
+    public string Name { get; set; }
+    public int Age { get; set; }
+    public string Symptoms { get; set; }
+    public Patient(string Name, int Age, string Symptoms)
     {
-        this.name = name;
-        this.age = age;
-        this.symptoms = symptoms;
+        PatientId = Id++;
+        this.Name = Name.ToLower();
+        this.Age = Age;
+        this.Symptoms = Symptoms;
     }
-    //Functionality of class
+  
 }
 
