@@ -14,11 +14,11 @@ do
 {
     Console.WriteLine("==========================");
     Console.WriteLine("Choose an option:");
-    Console.WriteLine("1 Register for patient.");
-    Console.WriteLine("2 Show patients.");
-    Console.WriteLine("3 Find patient.");
+    Console.WriteLine("1. Register for patient.");
+    Console.WriteLine("2. Show patients.");
+    Console.WriteLine("3. Find patient.");
     Console.WriteLine("4. Register for pet.");
-    Console.WriteLine("5 Show users with pets.");
+    Console.WriteLine("5. Show users with pets.");
     Console.WriteLine("8. Leave.");
     var options=Console.ReadLine();
     Console.WriteLine("==========================");
@@ -80,7 +80,7 @@ do
             {
                 Console.WriteLine("Name of the patient:");
                 string name = Console.ReadLine();
-                
+                //Search an user
                 var patient = patients.FirstOrDefault(p => p.Name == name);
                 
                 if (patient == null)
@@ -90,6 +90,7 @@ do
                 }
                 var newPets = new List<Pet>();
                 ServicePet.CreatePet(newPets);
+                //Here, for created a new user with pet
                 if (patientPets.ContainsKey(patient.PatientId))
                 {
                     patientPets[patient.PatientId].AddRange(newPets);
@@ -112,6 +113,7 @@ do
         {
             try
             {
+                //In this part of code, it is doing consult for show the inventory
                 foreach (var entry in patientPets)
                 {
                     Console.WriteLine($"Id of user is {entry.Key}");
@@ -121,8 +123,6 @@ do
                         Console.WriteLine($"   Pet: {pet.Name}, Breed: {pet.Breed}, Gender: {pet.Gender}");
                     }
                 }
-
-
                 break;
             }
             catch (Exception e)
