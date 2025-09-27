@@ -3,9 +3,8 @@ using VetPetcare.Models;
 
 var patients = new List<Patient>();
 
-var pets = new List<Pet>();
+var patientPets = new Dictionary<int, List<Pet>>();
 
-var patientsAndPets = new Dictionary<object, object>();
 
 //Controller of cycle
 var control = true;
@@ -19,8 +18,8 @@ do
     Console.WriteLine("2 Show patients.");
     Console.WriteLine("3 Find patient.");
     Console.WriteLine("4. Register for pet.");
-    Console.WriteLine("5 Show pets.");
-    Console.WriteLine("6. Leave.");
+    Console.WriteLine("5 Show users with pets.");
+    Console.WriteLine("8. Leave.");
     var options=Console.ReadLine();
     Console.WriteLine("==========================");
     switch (options)
@@ -30,7 +29,6 @@ do
             try
             {
                 ServicePatient.CreatePatient(patients);
-                patientsAndPets.Add(patients, patients);
                break;
             }
             catch (Exception e)
@@ -66,11 +64,7 @@ do
                 {
                     Console.WriteLine("Write the name of the patient:");
                     string name = Console.ReadLine();
-                    ServicePatient.FindPatient(name,patients);
-                    if (ServicePatient.FindPatient(name,patients) == null)
-                    {
-                        Console.WriteLine("Patient not found.");
-                    }
+                    ServicePatient.FindPatient(name, patients);
                 }
                 break;
             }
@@ -84,8 +78,27 @@ do
         {
             try
             {
-                ServicePet.CreatePet(pets);
-                patientsAndPets.Add(patients, pets);
+                Console.WriteLine("Name of the patient:");
+                string name = Console.ReadLine();
+                
+                var patient = patients.FirstOrDefault(p => p.Name == name);
+                
+                if (patient == null)
+                {
+                    Console.WriteLine("Patient not found.");
+                    break;
+                }
+                var newPets = new List<Pet>();
+                ServicePet.CreatePet(newPets);
+                if (patientPets.ContainsKey(patient.PatientId))
+                {
+                    patientPets[patient.PatientId].AddRange(newPets);
+                }
+                else
+                {
+                    patientPets[patient.PatientId] = newPets;
+                }
+
                 break;
             }
             catch (Exception e)
@@ -95,13 +108,32 @@ do
                 break;
             }
         } 
-            
         case "5":
         {
-            ServicePet.ShowList(pets);
-            break;
+            try
+            {
+                foreach (var entry in patientPets)
+                {
+                    Console.WriteLine($"Id of user is {entry.Key}");
+
+                    foreach (var pet in entry.Value)
+                    {
+                        Console.WriteLine($"   Pet: {pet.Name}, Breed: {pet.Breed}, Gender: {pet.Gender}");
+                    }
+                }
+
+
+                break;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+            
         }
-        case "6":
+          
+        case "8":
         {
             Console.WriteLine("Thanks for use the application.");
             control = false;

@@ -22,7 +22,8 @@ public static class ServicePet
     {
         try
         {
-            Console.WriteLine("Enter your name:");
+            
+            Console.WriteLine("Name pet:");
             string name = Console.ReadLine();
             if (name.Length < 2)
             {
@@ -56,6 +57,8 @@ public static class ServicePet
             string symptoms = Console.ReadLine();
             item.Add(new Pet(name,breed,gender,age,symptoms));
             Console.WriteLine("Pet created.");
+            
+            
         }
         catch (Exception e)
         {

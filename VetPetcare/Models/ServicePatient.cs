@@ -5,16 +5,19 @@ public static class ServicePatient
         //Find a patient
         public static string FindPatient(string name, List<Patient> item)
         {
-            foreach (var p in item)
+            var patient = item.FirstOrDefault(p => p.Name == name);
+
+            if (patient != null)
             {
-                if (name == p.Name)
-                {
-                    Console.WriteLine("Patient found");
-                    Console.WriteLine($"name: {p.Name}, age: {p.Age}, syphtoms: {p.Symptoms}");
-                }
+                Console.WriteLine("Patient found");
+                Console.WriteLine($"name: {patient.Name}, age: {patient.Age}, symptoms: {patient.Symptoms}");
+            }
+            else
+            {
+                Console.WriteLine("Patient not found");
             }
 
-            return "Don't found";
+            return "Operation terminated";
         }
 
         // Create new patient
@@ -40,8 +43,8 @@ public static class ServicePatient
 
                 Console.WriteLine("Enter your symptoms");
                 string symptoms = Console.ReadLine();
+                Console.WriteLine($"Yours id is {Patient.Id} ");
                 item.Add(new Patient(name, age, symptoms));
-                Console.WriteLine($"Yours id is {} ");
                 Console.WriteLine("Patient created.");
             }
             catch (Exception e)
@@ -58,7 +61,7 @@ public static class ServicePatient
             Console.WriteLine("The following patients are available:");
             foreach (var p in item)
             {
-                Console.WriteLine($"ID: {p.Id} NAME:{p.Name}, AGE:{p.Age}, SYMPTOMS{p.Symptoms}");
+                Console.WriteLine($"ID: {p.PatientId} NAME:{p.Name}, AGE:{p.Age}, SYMPTOMS{p.Symptoms}");
             }
         }
 }
