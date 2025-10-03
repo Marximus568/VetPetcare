@@ -3,7 +3,7 @@ namespace VetPetcare.Models;
 public static class ServicePatient
 {
         //Find a patient
-        public static string FindPatient(string name, List<Client> item)
+        public static string FindPatient(string name, List<Patient> item)
         {
             foreach (var p in item)
             {
@@ -18,7 +18,7 @@ public static class ServicePatient
         }
 
         // Create new patient
-        public static void CreatePatient(List<Client> item)
+        public static void CreatePatient(List<Patient> item)
         {
             try
             {
@@ -40,7 +40,7 @@ public static class ServicePatient
 
                 Console.WriteLine("Enter your symptoms");
                 string symptoms = Console.ReadLine();
-                item.Add(new Client(name, age, symptoms));
+                item.Add(new Patient(name, age, symptoms));
                 Console.WriteLine($"Yours id is {} ");
                 Console.WriteLine("Patient created.");
             }
@@ -53,7 +53,7 @@ public static class ServicePatient
         }
 
         //Read the list
-        public static void ShowList(List<Client> item)
+        public static void ShowList(List<Patient> item)
         {
             Console.WriteLine("The following patients are available:");
             foreach (var p in item)

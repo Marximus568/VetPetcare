@@ -2,27 +2,13 @@ namespace VetPetcare.Models;
 
 public static class ServicePet
 {
-    //Find a Pet
-    public static string FindPet(string name, List<Pet> item)
-    {
-        foreach (var p in item)
-        {
-            if (name == p.Name)
-            {
-                Console.WriteLine("Pet found");
-                Console.WriteLine($"name: {p.Name}, age: {p.Age}, syphtoms: {p.Symptoms}");
-            }
-        }
-
-        return "Don't found";
-    }
-
     // Create new Pet
     public static void CreatePet(List<Pet> item)
     {
         try
         {
-            Console.WriteLine("Enter your name:");
+            
+            Console.WriteLine("Name pet:");
             string name = Console.ReadLine();
             if (name.Length < 2)
             {
@@ -44,18 +30,20 @@ public static class ServicePet
                 return;
             }
 
-            Console.WriteLine("Enter your age");
+            Console.WriteLine("Enter its age");
             int age = Convert.ToInt32(Console.ReadLine());
-            if (age <= 0 || age >= 110)
+            if (age <= 0 || age >= 15)
             {
-                Console.WriteLine("Yours information is invalid.");
+                Console.WriteLine("These's information is invalid.");
                 return;
             }
 
-            Console.WriteLine("Enter your symptoms");
+            Console.WriteLine("Enter its symptoms");
             string symptoms = Console.ReadLine();
             item.Add(new Pet(name,breed,gender,age,symptoms));
             Console.WriteLine("Pet created.");
+            
+            
         }
         catch (Exception e)
         {
