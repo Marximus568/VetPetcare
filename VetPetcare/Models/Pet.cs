@@ -1,19 +1,13 @@
 namespace VetPetcare.Models;
 
-public class Pet
+public class Pet(string name, string breed, string species, string gender) 
+    : Animal(name, species, gender)
 {
-    public string Name { get; set; }
-    public string Breed { get; set; }
-    public string Gender { get; set; }
+    public string Name { get; set; } = name;
+    public string Breed { get; set; } = breed;
+    public string Species { get; set; } = species;
+    public string Gender { get; set; } = gender;
+
     public int Age { get; set; }
     public string Symptoms { get; set; }
-
-    public Pet(string name, string breed, string gender, int age, string symptoms)
-    {
-        this.Name = name;
-        this.Breed = breed;
-        this.Gender = gender;
-        this.Age = age;
-        this.Symptoms = symptoms;
-    }
 }
