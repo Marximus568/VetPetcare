@@ -2,7 +2,7 @@ namespace VetPetcare.Models;
 
 
 public abstract class Animal
-{   
+{
     private static int _lastId = 0;
     protected int Id { get; private set; } = ++_lastId;
     private string name;
@@ -15,8 +15,13 @@ public abstract class Animal
         get => name;
         set => name = string.IsNullOrWhiteSpace(value) ? "Unknown" : value.Trim();
     }
-    
-    public string Breed { get => breed; set => breed = value; }
+
+    public string Breed
+    {
+        get => breed;
+        set => breed = value;
+    }
+
     public string Species
     {
         get => species;
@@ -26,6 +31,21 @@ public abstract class Animal
     public string Gender
     {
         get => gender;
-        set => gender= string.IsNullOrWhiteSpace(value) ? "Unknown" : value.Trim();
+        set => gender = string.IsNullOrWhiteSpace(value) ? "Unknown" : value.Trim();
+    }
+
+    protected Animal(string name, string species, string breed, string gender)
+    {
+        this.name = name;
+        this.species = species;
+        this.breed = breed;
+        this.gender = gender;
+    }
+
+    protected Animal(string name, string species, string gender)
+    {
+        this.name = name;
+        this.species = species;
+        this.gender = gender;
     }
 }

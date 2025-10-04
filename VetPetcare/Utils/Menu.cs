@@ -5,12 +5,6 @@ public static class Menu
 {
     public static void ShowMenu()
     {
-        var patients = new List<Client>();
-
-        var pets = new List<Pet>();
-
-        var patientsAndPets = new Dictionary<object, object>();
-
         var control = true;
 
         Console.WriteLine("==========================");

@@ -1,6 +1,6 @@
 namespace VetPetcare.Interface;
 
-public class IRegistrable
+public interface IDeleteClient
 {
-   
+    
 }
