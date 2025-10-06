@@ -4,7 +4,7 @@ namespace VetPetcare.Database;
 
 public static class Database
 {
-    public static List<Client> Patients = new List<Client>();
+    public static List<Client> Clients = new List<Client>();
 
     public static List<Pet> Pets= new List<Pet>();
 

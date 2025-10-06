@@ -21,4 +21,12 @@ public abstract class People(string FirstName,string LastName, DateTime DateOfBi
             return age;
         }
     }
+    public string GetInfo()
+    {
+        return $"Name: {FirstName} {LastName}\n" +
+               $"Email: {Email}\n" +
+               $"Address: {Address}\n" +
+               $"Gender: {Gender}\n" +
+               $"Birth date: {DateOfBirth:dd/MM/yyyy}";
+    }
 }
