@@ -7,5 +7,5 @@ public interface IClientRepository
     Client Create(Client client);
     Client GetById(int id);
     IEnumerable<Client> GetAll();
-    Client DeleteById(int id);
+    bool DeleteById(int id);
 }

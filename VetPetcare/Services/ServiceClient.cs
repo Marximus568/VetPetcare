@@ -60,8 +60,7 @@ namespace VetPetcare.Models
                     address = Console.ReadLine()?.Trim();
                     if (string.IsNullOrWhiteSpace(address)) Console.WriteLine("Address cannot be empty.");
                 } while
-                    (string.IsNullOrWhiteSpace(
-                         address)); // Crear y guardar cliente
+                    (string.IsNullOrWhiteSpace(address)); // Crear y guardar cliente
 
                 var newClient = new Client(firstName, lastName, dateOfBirth, gender, email, address);
                 _repository.Create(newClient);
@@ -112,13 +111,13 @@ namespace VetPetcare.Models
             public static void DeleteClient(int id)
             {
                 var deleted = _repository.DeleteById(id);
-                if (deleted == null)
+                if (deleted == false)
                 {
                     Console.WriteLine("Client not found. Nothing was deleted.");
                     return;
                 }
 
-                Console.WriteLine($"Client with ID {deleted.Id} was successfully deleted.");
+                Console.WriteLine($"Client was successfully deleted.");
             }
         }
     }

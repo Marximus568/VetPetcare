@@ -21,14 +21,11 @@ public class ClientRepository : IClientRepository
         return Database.Database.Clients;
     }
 
-    public Client DeleteById(int id)
+    public bool DeleteById(int id)
     {
         var client = Database.Database.Clients.FirstOrDefault(c => c.Id == id);
-        if (client != null)
-        {
-            Database.Database.Clients.Remove(client);
-        }
-
-        return client;
+        if (client == null) return false;
+        Database.Database.Clients.Remove(client);
+        return true;
     }
 }
