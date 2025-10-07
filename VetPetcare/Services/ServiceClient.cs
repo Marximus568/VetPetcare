@@ -71,53 +71,54 @@ namespace VetPetcare.Models
             {
                 Console.WriteLine(" Something went wrong. Try again.");
                 Console.WriteLine(e.Message);
-            } }
-
-            // Buscar cliente por ID
-            public static string FindClient(int id)
-            {
-                var client = _repository.GetById(id);
-                if (client == null)
-                {
-                    Console.WriteLine("Client not found.");
-                    return "Not found";
-                }
-
-                Console.WriteLine("Client found:\n");
-                Console.WriteLine(client.GetInfo());
-                return "Found...";
-            }
-
-            // Mostrar todos los clientes
-            public static void ShowList()
-            {
-                var clients = _repository.GetAll().ToList();
-
-                if (clients.Count == 0)
-                {
-                    Console.WriteLine("No clients registered.");
-                    return;
-                }
-
-                foreach (var client in clients)
-                {
-                    Console.WriteLine(client.GetInfo());
-                    Console.WriteLine($"Pets: {client.Pets.Count}");
-                    Console.WriteLine(new string('-', 40));
-                }
-            }
-
-            // Eliminar cliente por ID
-            public static void DeleteClient(int id)
-            {
-                var deleted = _repository.DeleteById(id);
-                if (deleted == false)
-                {
-                    Console.WriteLine("Client not found. Nothing was deleted.");
-                    return;
-                }
-
-                Console.WriteLine($"Client was successfully deleted.");
             }
         }
+
+        // Buscar cliente por ID
+        public static string FindClient(int id)
+        {
+            var client = _repository.GetById(id);
+            if (client == null)
+            {
+                Console.WriteLine("Client not found.");
+                return "Not found";
+            }
+
+            Console.WriteLine("Client found:\n");
+            Console.WriteLine(client.GetInfo());
+            return "Found...";
+        }
+
+        // Mostrar todos los clientes
+        public static void ShowList()
+        {
+            var clients = _repository.GetAll().ToList();
+
+            if (clients.Count == 0)
+            {
+                Console.WriteLine("No clients registered.");
+                return;
+            }
+
+            foreach (var client in clients)
+            {
+                Console.WriteLine(client.GetInfo());
+                Console.WriteLine($"Pets: {client.Pets.Count}");
+                Console.WriteLine(new string('-', 40));
+            }
+        }
+
+        // Eliminar cliente por ID
+        public static void DeleteClient(int id)
+        {
+            var deleted = _repository.DeleteById(id);
+            if (deleted == false)
+            {
+                Console.WriteLine("Client not found. Nothing was deleted.");
+                return;
+            }
+
+            Console.WriteLine($"Client was successfully deleted.");
+        }
     }
+}

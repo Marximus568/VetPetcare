@@ -6,52 +6,51 @@ public static class MenuClient
     public static void ShowMenu()
     {
         var control = true;
-
-        Console.WriteLine("==========================");
-        Console.WriteLine("Choose an option:");
-        Console.WriteLine("1 Register for patient.");
-        Console.WriteLine("2 Show patients.");
-        Console.WriteLine("3 Find patient.");
-        Console.WriteLine("4. Leave.");
-        var options = Console.ReadLine();
-        Console.WriteLine("==========================");
-
-        switch (options)
+        do
         {
-            case "1":
-            {
-                ServiceClient.CreateClient();
-                break;
-            }
-            case "2":
-            {
-                ServiceClient.ShowList();
-                break;
-            }
+            Console.WriteLine("==========================");
+            Console.WriteLine("Choose an option:");
+            Console.WriteLine("1 Register for patient.");
+            Console.WriteLine("2 Show patients.");
+            Console.WriteLine("3 Find patient.");
+            Console.WriteLine("4. Leave.");
+            var options = Console.ReadLine();
+            Console.WriteLine("==========================");
 
-            case "3":
+            switch (options)
             {
+                case "1":
                 {
-                    Console.WriteLine("Write a id");
-                    int id = int.Parse(Console.ReadLine());
-                    ServiceClient.FindClient(id);
-                    break;
+                    ServiceClient.CreateClient();
+                    return;
                 }
-            }
-            
-            case "4":
-            {
-                Console.WriteLine("Thanks for use the application.");
-                control = false;
-                break;
-            }
-            default:
-            {
-                Console.WriteLine("Invalid option. Try again.");
-                break;
-            }
-        }
+                case "2":
+                {
+                    ServiceClient.ShowList();
+                    return;
+                }
 
-        while (control) ;
+                case "3":
+                {
+                    {
+                        Console.WriteLine("Write a id");
+                        int id = int.Parse(Console.ReadLine());
+                        ServiceClient.FindClient(id);
+                        return;
+                    }
+                }
+
+                case "4":
+                {
+                    Console.WriteLine("You will return page past.");
+                    control = false;
+                    return;
+                }
+                default:
+                {
+                    Console.WriteLine("Invalid option. Try again.");
+                    return;
+                }
+            } while (control);
+        }
     }
-}

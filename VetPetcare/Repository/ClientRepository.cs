@@ -13,7 +13,7 @@ public class ClientRepository : IClientRepository
 
     public Client GetById(int id)
     {
-        return Database.Database.Clients.FirstOrDefault(c => c.Id == id);
+        return Database.Database.Clients.First(c => c.Id == id);
     }
 
     public IEnumerable<Client> GetAll()
