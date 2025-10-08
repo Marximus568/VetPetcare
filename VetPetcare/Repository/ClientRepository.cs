@@ -1,4 +1,4 @@
-using VetPetcare.Interface.ClientRepository;
+
 using VetPetcare.Models;
 
 namespace VetPetcare.Repository;
@@ -13,7 +13,7 @@ public class ClientRepository : IClientRepository
 
     public Client GetById(int id)
     {
-        return Database.Database.Clients.First(c => c.Id == id);
+        return Database.Database.Clients.First(c => c.ClientId == id);
     }
 
     public IEnumerable<Client> GetAll()
@@ -23,7 +23,7 @@ public class ClientRepository : IClientRepository
 
     public bool DeleteById(int id)
     {
-        var client = Database.Database.Clients.FirstOrDefault(c => c.Id == id);
+        var client = Database.Database.Clients.First(c => c.ClientId == id);
         if (client == null) return false;
         Database.Database.Clients.Remove(client);
         return true;

@@ -13,7 +13,8 @@ public static class MenuClient
             Console.WriteLine("1 Register for patient.");
             Console.WriteLine("2 Show patients.");
             Console.WriteLine("3 Find patient.");
-            Console.WriteLine("4. Leave.");
+            Console.WriteLine("4 Delete patient.");
+            Console.WriteLine("5. Leave.");
             var options = Console.ReadLine();
             Console.WriteLine("==========================");
 
@@ -22,12 +23,12 @@ public static class MenuClient
                 case "1":
                 {
                     ServiceClient.CreateClient();
-                    return;
+                    break;
                 }
                 case "2":
                 {
                     ServiceClient.ShowList();
-                    return;
+                    break;
                 }
 
                 case "3":
@@ -36,11 +37,20 @@ public static class MenuClient
                         Console.WriteLine("Write a id");
                         int id = int.Parse(Console.ReadLine());
                         ServiceClient.FindClient(id);
-                        return;
+                        break;
                     }
                 }
 
                 case "4":
+                {
+                    {
+                        Console.WriteLine("Write a id");
+                        int id = int.Parse(Console.ReadLine());
+                        ServiceClient.DeleteClient(id);
+                        break;
+                    }
+                }
+                case "5":
                 {
                     Console.WriteLine("You will return page past.");
                     control = false;
@@ -49,8 +59,9 @@ public static class MenuClient
                 default:
                 {
                     Console.WriteLine("Invalid option. Try again.");
-                    return;
+                    break;
                 }
-            } while (control);
-        }
+            }
+        } while (control);
     }
+}

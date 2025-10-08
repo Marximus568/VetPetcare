@@ -65,7 +65,7 @@ namespace VetPetcare.Models
                 var newClient = new Client(firstName, lastName, dateOfBirth, gender, email, address);
                 _repository.Create(newClient);
                 Console.WriteLine("\n Your client has been created successfully!");
-                Console.WriteLine($"Your ID is: {newClient.Id}");
+                Console.WriteLine($"Your ID is: {newClient.ClientId}");
             }
             catch (Exception e)
             {

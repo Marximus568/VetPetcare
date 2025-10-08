@@ -3,7 +3,7 @@ namespace VetPetcare.Models;
 public abstract class People(string FirstName,string LastName, DateTime DateOfBirth, string Gender, string Email, string Address)
 {
     private static int _lastId = 0;
-    protected int Id { get; private set; } = ++_lastId;
+    protected int Id { get; private set; } = _lastId++;
     protected string FirstName { get; set; } = FirstName;
     protected string LastName { get; set; } = LastName;
     protected DateTime DateOfBirth { get; set; } = DateOfBirth;
@@ -23,10 +23,11 @@ public abstract class People(string FirstName,string LastName, DateTime DateOfBi
     }
     public string GetInfo()
     {
-        return $"Name: {FirstName} {LastName}\n" +
-               $"Email: {Email}\n" +
-               $"Address: {Address}\n" +
-               $"Gender: {Gender}\n" +
-               $"Birth date: {DateOfBirth:dd/MM/yyyy}";
+        return  $"ID: {Id}\n"+ 
+                $"Name: {FirstName} {LastName}\n" +
+                $"Email: {Email}\n" +
+                $"Address: {Address}\n" +
+                $"Gender: {Gender}\n" +
+                $"Birth date: {DateOfBirth:dd/MM/yyyy}";
     }
 }

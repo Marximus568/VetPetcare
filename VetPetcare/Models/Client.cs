@@ -10,7 +10,7 @@ public class Client(
     string address)
     : People(firstName, lastName, dateOfBirth, gender, email, address)
 {
-    public int Id { get; private set; }
+    public int ClientId => base.Id;
 
     public List<Pet> Pets { get; set; } = new();
 

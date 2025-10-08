@@ -1,6 +1,3 @@
-using VetPetcare.Models;
-
-namespace VetPetcare.Interface.ClientRepository;
 
 public interface IClientRepository
 {
