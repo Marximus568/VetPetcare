@@ -9,4 +9,6 @@ public static class Database
     public static List<Pet> Pets= new List<Pet>();
 
     public static Dictionary<object, object> ClientAndPets= new Dictionary<object, object>();
+    
+    public static Dictionary<object, object> MedicalAppointment = new Dictionary<object, object>();
 }

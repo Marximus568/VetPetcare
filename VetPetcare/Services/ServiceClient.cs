@@ -6,7 +6,7 @@ namespace VetPetcare.Models
     {
         private static readonly ClientRepository _repository = new ClientRepository();
 
-        // Crear nuevo cliente
+        // Method for created new client
         public static void CreateClient()
         {
             try
@@ -74,7 +74,7 @@ namespace VetPetcare.Models
             }
         }
 
-        // Buscar cliente por ID
+        //Method for search by ID
         public static string FindClient(int id)
         {
             var client = _repository.GetById(id);
@@ -89,7 +89,7 @@ namespace VetPetcare.Models
             return "Found...";
         }
 
-        // Mostrar todos los clientes
+        // Method for show all client
         public static void ShowList()
         {
             var clients = _repository.GetAll().ToList();
@@ -108,7 +108,74 @@ namespace VetPetcare.Models
             }
         }
 
-        // Eliminar cliente por ID
+        public static void UpdateUser(Client newClient, int id)
+        {
+            if (newClient == null)
+            {
+                Console.WriteLine("Error: client cannot be null.");
+                return;
+            }
+
+            if (id <= 0)
+            {
+                Console.WriteLine("Error: ID must be greater than 0.");
+                return;
+            }
+
+            if (string.IsNullOrWhiteSpace(newClient.FirstName) ||
+                string.IsNullOrWhiteSpace(newClient.LastName))
+            {
+                Console.WriteLine("Error: first name and last name are required.");
+                return;
+            }
+
+            if (string.IsNullOrWhiteSpace(newClient.Email) ||
+                !newClient.Email.Contains("@"))
+            {
+                Console.WriteLine("Error: invalid email address.");
+                return;
+            }
+
+            if (string.IsNullOrWhiteSpace(newClient.Gender))
+            {
+                Console.WriteLine("Error: gender is required.");
+                return;
+            }
+
+            if (string.IsNullOrWhiteSpace(newClient.Address))
+            {
+                Console.WriteLine("Error: address is required.");
+                return;
+            }
+
+            if (newClient.DateOfBirth == default)
+            {
+                Console.WriteLine("Error: date of birth is required.");
+                return;
+            }
+
+            if (newClient.DateOfBirth.Year > DateTime.Now.Year)
+            {
+                Console.WriteLine("Error: year of birth cannot be greater than the current year.");
+                return;
+            }
+
+            if (newClient.DateOfBirth > DateTime.Now)
+            {
+                Console.WriteLine("Error: date of birth cannot be in the future.");
+                return;
+            }
+
+            var success = _repository.Update(newClient, id);
+
+            if (success != true)
+                Console.WriteLine("Client updated successfully.");
+            else
+                Console.WriteLine("Error: client not found or could not be updated.");
+        }
+
+
+        // Method for delete client by ID
         public static void DeleteClient(int id)
         {
             var deleted = _repository.DeleteById(id);

@@ -1,4 +1,5 @@
 
+using System.Xml;
 using VetPetcare.Models;
 
 namespace VetPetcare.Repository;
@@ -21,6 +22,23 @@ public class ClientRepository : IClientRepository
         return Database.Database.Clients;
     }
 
+    public bool Update(Client client, int id)
+    {
+        int index = Database.Database.Clients.FindIndex(c => c.ClientId == id);
+
+        if (index == -1)
+        {
+            Console.WriteLine("Client not found.");
+            return false;
+        }
+        client.ClientId = id;
+        Database.Database.Clients[index] = client;
+
+        Console.WriteLine("Client updated successfully.");
+
+        return true;
+    }
+
     public bool DeleteById(int id)
     {
         var client = Database.Database.Clients.First(c => c.ClientId == id);
@@ -28,4 +46,5 @@ public class ClientRepository : IClientRepository
         Database.Database.Clients.Remove(client);
         return true;
     }
+    
 }

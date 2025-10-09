@@ -1,6 +1,6 @@
 namespace VetPetcare.Models;
 
-public class Pet(string name, string breed, string species, string gender) 
+public class Pet(string name, string breed, string species, string gender, DateOnly dateOfBirth, string symptoms) 
     : Animal(name, species, gender)
 {
     public string Name { get; set; } = name;
@@ -8,6 +8,7 @@ public class Pet(string name, string breed, string species, string gender)
     public string Species { get; set; } = species;
     public string Gender { get; set; } = gender;
 
-    public int Age { get; set; }
-    public string Symptoms { get; set; }
+    public DateOnly BirthDay { get; set; } = dateOfBirth;
+    public string Symptoms { get; set; } = symptoms;
+    
 }
