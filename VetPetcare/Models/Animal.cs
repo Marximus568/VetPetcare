@@ -1,51 +1,17 @@
 namespace VetPetcare.Models;
 
 
-public abstract class Animal
+public abstract class Animal(string Name, string Species, string Breed, string Gender)
 {
-    private static int _lastId = 0;
-    protected int Id { get; private set; } = ++_lastId;
-    private string name;
-    private string species;
-    private string breed;
-    private string gender;
+    private static int _lastId = 1;
 
-    protected string Name
-    {
-        get => name;
-        set => name = string.IsNullOrWhiteSpace(value) ? "Unknown" : value.Trim();
-    }
+    public int Id { get; protected set; } = _lastId++;
+    public string Name { get; protected set; } = string.IsNullOrWhiteSpace(Name) ? "Unknown" : Name.Trim();
+    public string Species { get; protected set; } = string.IsNullOrWhiteSpace(Species) ? "Unknown" : Species.Trim();
+    public string Breed { get; protected set; } = string.IsNullOrWhiteSpace(Breed) ? "Unknown" : Breed.Trim();
+    public string Gender { get; protected set; } = string.IsNullOrWhiteSpace(Gender) ? "Unknown" : Gender.Trim();
 
-    protected string Breed
-    {
-        get => breed;
-        set => breed = value;
-    }
-
-    protected string Species
-    {
-        get => species;
-        set => species = string.IsNullOrWhiteSpace(value) ? "Unknown" : value.Trim();
-    }
-
-    protected string Gender
-    {
-        get => gender;
-        set => gender = string.IsNullOrWhiteSpace(value) ? "Unknown" : value.Trim();
-    }
-
-    protected Animal(string name, string species, string breed, string gender)
-    {
-        this.name = name;
-        this.species = species;
-        this.breed = breed;
-        this.gender = gender;
-    }
-
-    protected Animal(string name, string species, string gender)
-    {
-        this.name = name;
-        this.species = species;
-        this.gender = gender;
-    }
+    // Constructor opcional con menos parámetros
+    protected Animal(string Name, string Species, string Gender)
+        : this(Name, Species, "Unknown", Gender) { }
 }

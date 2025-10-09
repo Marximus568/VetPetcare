@@ -20,27 +20,27 @@ public static class MenuMain
             {
                 case 1:
                 {
-                    MenuClient.ShowMenu();
+                    MenuClient.ShowClient();
                     break;
                 }
                 case 2:
                 {
-                    MenuClient.ShowMenu();
+                    MenuPet.ShowPet();
                     break;
                 }
                 case 3:
                 {
-                    MenuClient.ShowMenu();
+                    MenuClient.ShowClient();
                     break;
                 }
                 case 4:
                 {
-                    MenuClient.ShowMenu();
+                    MenuClient.ShowClient();
                     break;
                 }
                 case 5:
                 {
-                    MenuClient.ShowMenu();
+                    MenuClient.ShowClient();
                     break;
                 }
                 case 6:

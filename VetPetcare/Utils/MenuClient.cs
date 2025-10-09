@@ -3,7 +3,7 @@ using VetPetcare.Models;
 
 public static class MenuClient
 {
-    public static void ShowMenu()
+    public static void ShowClient()
     {
         var control = true;
         do
