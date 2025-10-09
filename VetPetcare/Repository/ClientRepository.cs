@@ -34,10 +34,9 @@ public class ClientRepository : IClientRepository
         client.ClientId = id;
         Database.Database.Clients[index] = client;
 
-        Console.WriteLine("Client updated successfully.");
-
         return true;
     }
+
 
     public bool DeleteById(int id)
     {

@@ -47,7 +47,6 @@ public static class MenuClient
                     {
                         Console.WriteLine("Write a id");
                         int id = int.Parse(Console.ReadLine());
-                        
                         ServiceClient.UpdateUser(id);
                         break;
                     }

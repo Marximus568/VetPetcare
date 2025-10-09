@@ -13,7 +13,7 @@ public class Client(
     public int ClientId
     {
         get => base.Id;
-        set => throw new NotImplementedException();
+        internal set => base.Id = value;
     }
 
     public List<Pet> Pets { get; set; } = new();
