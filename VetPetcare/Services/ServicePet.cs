@@ -49,8 +49,7 @@ public static class ServicePet
 
             DateTime dateOfBirth;
             int currentYear = DateTime.Now.Year;
-
-            while (true)
+            do
             {
                 Console.WriteLine("Enter date of birth (yyyy-mm-dd):");
                 string input = Console.ReadLine()?.Trim() ?? "";
@@ -60,33 +59,19 @@ public static class ServicePet
                     Console.WriteLine("Invalid date format. Please use yyyy-mm-dd.");
                     continue;
                 }
-
                 int age = currentYear - dateOfBirth.Year;
-
                 if (dateOfBirth > DateTime.Now)
                 {
                     Console.WriteLine("Date of birth cannot be in the future.");
+                    continue;
                 }
-                else if (age > 100)
+                if (age > 100)
                 {
                     Console.WriteLine("Age cannot be greater than 100 years.");
+                    continue;
                 }
-                else
-                {
-                    // Valid date
-                    break;
-                }
-            }
-
-            string symptoms;
-            do
-            {
-                Console.WriteLine("Enter the pet's symptoms:");
-                symptoms = Console.ReadLine()?.Trim();
-                if (string.IsNullOrWhiteSpace(symptoms))
-                    Console.WriteLine("Symptoms cannot be empty.");
-            } while (string.IsNullOrWhiteSpace(symptoms));
-
+                break;
+            } while (true);
             var newPet = new Pet(name, breed, species, gender, dateOfBirth);
             _repository.Create(newPet);
 
@@ -207,14 +192,35 @@ public static class ServicePet
                     Console.WriteLine("Please enter 'M' for male or 'F' for female.");
             } while (gender != "M" && gender != "F");
 
-            DateOnly dateOfBirth;
-            while (true)
+            DateTime dateOfBirth;
+            int currentYear = DateTime.Now.Year;
+
+            do
             {
-                Console.WriteLine("Enter the pet's date of birth (yyyy-mm-dd):");
-                if (DateOnly.TryParse(Console.ReadLine(), out dateOfBirth))
-                    break;
-                Console.WriteLine("Invalid date format. Please use yyyy-mm-dd.");
-            }
+                Console.WriteLine("Enter date of birth (yyyy-mm-dd):");
+                string input = Console.ReadLine()?.Trim() ?? "";
+
+                if (!DateTime.TryParse(input, out dateOfBirth))
+                {
+                    Console.WriteLine("Invalid date format. Please use yyyy-mm-dd.");
+                    continue;
+                }
+
+                int age = currentYear - dateOfBirth.Year;
+
+                if (dateOfBirth > DateTime.Now)
+                {
+                    Console.WriteLine("Date of birth cannot be in the future.");
+                    continue;
+                }
+
+                if (age > 100)
+                {
+                    Console.WriteLine("Age cannot be greater than 100 years.");
+                    continue;
+                }
+                break;
+            } while (true);
             
             var updatedPet = new Pet(name, breed, species, gender, dateOfBirth);
             var success = _repository.Update(updatedPet, id);
