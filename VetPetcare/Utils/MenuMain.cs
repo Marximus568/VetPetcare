@@ -38,7 +38,7 @@ public static class MenuMain
                     }
                     case "4":
                     {
-                        MenuClient.ShowClient();
+                        MenuMedicalAppointment.ShowMedicalAppointment();
                         break;
                     }
                     case "5":
