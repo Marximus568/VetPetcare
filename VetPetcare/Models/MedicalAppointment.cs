@@ -4,7 +4,7 @@ public class MedicalAppointment
 {
     private static int _lastId = 1;
 
-    public int AppointmentId { get; private set; } = _lastId++;
+    public int AppointmentId { get; internal set; } = _lastId++;
     public DateOnly Date { get; set; }
     public List<Veterinary> Veterinaries { get; set; } = new List<Veterinary>();
     public List<Client> Clients { get; set; } = new List<Client>();
