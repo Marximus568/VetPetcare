@@ -12,22 +12,23 @@ public static class ServiceMedicalAppointment
     {
         try
         {
-            
             var veterinarians = _veterinaryRepository.GetAll().ToList();
             var clients = _clientRepository.GetAll().ToList();
 
             if (!veterinarians.Any())
             {
-                Console.WriteLine("\n No veterinarians registered in the system. Please register one before scheduling an appointment.");
+                Console.WriteLine(
+                    "\nNo veterinarians registered in the system. Please register one before scheduling an appointment.");
                 return;
             }
 
             if (!clients.Any())
             {
-                Console.WriteLine("\nNo clients registered in the system. Please register one before scheduling an appointment.");
+                Console.WriteLine(
+                    "\nNo clients registered in the system. Please register one before scheduling an appointment.");
                 return;
             }
-            
+
             Console.WriteLine("Enter appointment date (yyyy-mm-dd):");
             DateOnly date;
             while (!DateOnly.TryParse(Console.ReadLine(), out date))
@@ -71,6 +72,24 @@ public static class ServiceMedicalAppointment
 
             string reason = MedicalAppointment.SelectAppointmentType();
 
+            // ============================================
+            // 🔍 VALIDATION: check if the slot is already taken
+            // ============================================
+            bool conflictExists = Database.Database.MedicalAppointment
+                .Values
+                .OfType<MedicalAppointment>()
+                .Any(a => a.Date == date && a.StartTime == chosenSlot.Start && a.EndTime == chosenSlot.End);
+
+            if (conflictExists)
+            {
+                Console.WriteLine(
+                    "\n⚠️  Cannot schedule appointment: There is already another appointment at the same date and time.");
+                return;
+            }
+
+            // ============================================
+            // ✅ Create appointment (no conflicts)
+            // ============================================
             var appointment = new MedicalAppointment
             {
                 Date = date,
@@ -84,7 +103,10 @@ public static class ServiceMedicalAppointment
 
             _repository.Create(appointment);
 
-            Console.WriteLine("\nAppointment successfully scheduled!");
+            // Add appointment to the dictionary
+            Database.Database.MedicalAppointment.Add(appointment.AppointmentId, appointment);
+
+            Console.WriteLine("\n✅ Appointment successfully scheduled!");
             Console.WriteLine("========================================");
             Console.WriteLine($"Date: {appointment.Date}");
             Console.WriteLine($"Time: {chosenSlot.Range}");
@@ -116,8 +138,10 @@ public static class ServiceMedicalAppointment
             Console.WriteLine($"ID: {a.AppointmentId}");
             Console.WriteLine($"Date: {a.Date}");
             Console.WriteLine($"Time: {a.StartTime:HH:mm} - {a.EndTime:HH:mm}");
-            Console.WriteLine($"Veterinary: {a.Veterinaries.FirstOrDefault()?.FirstName} {a.Veterinaries.FirstOrDefault()?.LastName}");
-            Console.WriteLine($"Client: {a.Clients.FirstOrDefault()?.FirstName} {a.Clients.FirstOrDefault()?.LastName}");
+            Console.WriteLine(
+                $"Veterinary: {a.Veterinaries.FirstOrDefault()?.FirstName} {a.Veterinaries.FirstOrDefault()?.LastName}");
+            Console.WriteLine(
+                $"Client: {a.Clients.FirstOrDefault()?.FirstName} {a.Clients.FirstOrDefault()?.LastName}");
             Console.WriteLine($"Reason: {a.Reason}");
             Console.WriteLine($"Symptoms: {a.Symptoms}");
             Console.WriteLine("----------------------------------------");
@@ -139,8 +163,10 @@ public static class ServiceMedicalAppointment
         Console.WriteLine($"Time: {appointment.StartTime:HH:mm} - {appointment.EndTime:HH:mm}");
         Console.WriteLine($"Reason: {appointment.Reason}");
         Console.WriteLine($"Symptoms: {appointment.Symptoms}");
-        Console.WriteLine($"Veterinary: {appointment.Veterinaries.FirstOrDefault()?.FirstName} {appointment.Veterinaries.FirstOrDefault()?.LastName}");
-        Console.WriteLine($"Client: {appointment.Clients.FirstOrDefault()?.FirstName} {appointment.Clients.FirstOrDefault()?.LastName}");
+        Console.WriteLine(
+            $"Veterinary: {appointment.Veterinaries.FirstOrDefault()?.FirstName} {appointment.Veterinaries.FirstOrDefault()?.LastName}");
+        Console.WriteLine(
+            $"Client: {appointment.Clients.FirstOrDefault()?.FirstName} {appointment.Clients.FirstOrDefault()?.LastName}");
         Console.WriteLine("----------------------------------------");
     }
 
