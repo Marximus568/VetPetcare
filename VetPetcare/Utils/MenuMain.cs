@@ -43,7 +43,7 @@ public static class MenuMain
                     }
                     case "5":
                     {
-                        MenuClient.ShowClient();
+                        MenuQueries.ShowMenu();
                         break;
                     }
                     case "6":

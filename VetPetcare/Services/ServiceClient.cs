@@ -132,11 +132,34 @@ namespace VetPetcare.Models
                 } while (string.IsNullOrWhiteSpace(lastName));
 
                 DateTime dateOfBirth;
+                int currentYear = DateTime.Now.Year;
+
                 while (true)
                 {
                     Console.WriteLine("Enter your date of birth (yyyy-mm-dd):");
-                    if (DateTime.TryParse(Console.ReadLine(), out dateOfBirth)) break;
-                    Console.WriteLine("Invalid date format. Please use yyyy-mm-dd.");
+                    string input = Console.ReadLine()?.Trim() ?? "";
+
+                    if (!DateTime.TryParse(input, out dateOfBirth))
+                    {
+                        Console.WriteLine("Invalid date format. Please use yyyy-mm-dd.");
+                        continue;
+                    }
+
+                    int age = currentYear - dateOfBirth.Year;
+
+                    if (dateOfBirth > DateTime.Now)
+                    {
+                        Console.WriteLine("Date of birth cannot be in the future.");
+                    }
+                    else if (age > 100)
+                    {
+                        Console.WriteLine("Age cannot be greater than 100 years.");
+                    }
+                    else
+                    {
+                        
+                        break;
+                    }
                 }
 
                 string gender;

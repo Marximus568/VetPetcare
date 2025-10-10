@@ -12,6 +12,22 @@ public static class ServiceMedicalAppointment
     {
         try
         {
+            
+            var veterinarians = _veterinaryRepository.GetAll().ToList();
+            var clients = _clientRepository.GetAll().ToList();
+
+            if (!veterinarians.Any())
+            {
+                Console.WriteLine("\n No veterinarians registered in the system. Please register one before scheduling an appointment.");
+                return;
+            }
+
+            if (!clients.Any())
+            {
+                Console.WriteLine("\nNo clients registered in the system. Please register one before scheduling an appointment.");
+                return;
+            }
+            
             Console.WriteLine("Enter appointment date (yyyy-mm-dd):");
             DateOnly date;
             while (!DateOnly.TryParse(Console.ReadLine(), out date))
