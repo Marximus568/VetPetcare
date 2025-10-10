@@ -1,6 +1,8 @@
+using VetPetcare.Interface;
+
 namespace VetPetcare.Repository;
 
-public class MedicalAppointment
+public class MedicalAppointment : IMedicalAppointment
 {
     
 }

@@ -14,4 +14,6 @@ public abstract class Animal(string Name, string Species, string Breed, string G
     // Constructor opcional con menos parámetros
     protected Animal(string Name, string Species, string Gender)
         : this(Name, Species, "Unknown", Gender) { }
+    
+    
 }

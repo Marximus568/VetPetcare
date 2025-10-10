@@ -10,9 +10,6 @@
     <ItemGroup>
       <Folder Include="Docs\" />
       <Folder Include="Dtos\" />
-      <Folder Include="Interface\IMedicalRepository\" />
-      <Folder Include="Interface\IVeterinaryRepository\" />
-      <Folder Include="Interface\IVetPetCareRepository\" />
     </ItemGroup>
 
 </Project>

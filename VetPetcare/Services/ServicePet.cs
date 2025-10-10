@@ -65,7 +65,7 @@ public static class ServicePet
                     Console.WriteLine("Symptoms cannot be empty.");
             } while (string.IsNullOrWhiteSpace(symptoms));
 
-            var newPet = new Pet(name, breed, species, gender, dateOfBirth, symptoms);
+            var newPet = new Pet(name, breed, species, gender, dateOfBirth);
             _repository.Create(newPet);
 
             Console.WriteLine("\nPet has been created successfully.");
@@ -121,7 +121,7 @@ public static class ServicePet
         foreach (var pet in pets)
         {
             Console.WriteLine(
-                $"ID: {pet.PetId}, Name: {pet.Name}, Species: {pet.Species}, Breed: {pet.Breed}, Gender: {pet.Gender}, BirthDay: {pet.BirthDay}, Symptoms: {pet.Symptoms}");
+                $"ID: {pet.PetId}, Name: {pet.Name}, Species: {pet.Species}, Breed: {pet.Breed}, Gender: {pet.Gender}, BirthDay: {pet.BirthDay}");
         }
     }
 
@@ -142,7 +142,7 @@ public static class ServicePet
         }
 
         Console.WriteLine(
-            $"ID: {pet.PetId}, Name: {pet.Name}, Species: {pet.Species}, Breed: {pet.Breed}, Gender: {pet.Gender}, BirthDay: {pet.BirthDay}, Symptoms: {pet.Symptoms}");
+            $"ID: {pet.PetId}, Name: {pet.Name}, Species: {pet.Species}, Breed: {pet.Breed}, Gender: {pet.Gender}, BirthDay: {pet.BirthDay}");
     }
 
     public static void UpdatePet(int id)
@@ -193,17 +193,8 @@ public static class ServicePet
                     break;
                 Console.WriteLine("Invalid date format. Please use yyyy-mm-dd.");
             }
-
-            string symptoms;
-            do
-            {
-                Console.WriteLine("Enter the pet's symptoms:");
-                symptoms = Console.ReadLine()?.Trim();
-                if (string.IsNullOrWhiteSpace(symptoms))
-                    Console.WriteLine("Symptoms cannot be empty.");
-            } while (string.IsNullOrWhiteSpace(symptoms));
-
-            var updatedPet = new Pet(name, breed, species, gender, dateOfBirth, symptoms);
+            
+            var updatedPet = new Pet(name, breed, species, gender, dateOfBirth);
             var success = _repository.Update(updatedPet, id);
 
             if (success)
