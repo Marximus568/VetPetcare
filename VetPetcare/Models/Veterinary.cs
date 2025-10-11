@@ -13,7 +13,7 @@ public class Veterinary(string FirstName,
         get => base.Id;
         internal set => base.Id = value;
     }
-    public string speciality{get; set;}
+    public string speciality{get; private set;}
 
     public Veterinary(string FirstName, 
         string LastName, 

@@ -133,7 +133,7 @@ namespace VetPetcare.Models
                 Console.WriteLine(new string('-', 40));
             }
         }
-
+        //Update to client
         public static void UpdateUser(int id)
         {
             try

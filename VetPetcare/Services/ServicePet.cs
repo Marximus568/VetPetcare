@@ -6,7 +6,7 @@ public static class ServicePet
 {
     private static readonly PetRepository _repository = new PetRepository();
     private static readonly ClientRepository _clientRepository = new ClientRepository();
-
+    //Create a pet
     public static Pet CreatePet()
     {
         try
@@ -114,7 +114,7 @@ public static class ServicePet
 
         return null;
     }
-
+    //Show all information
     public static void GetAllPets()
     {
         IEnumerable<Pet> pets = _repository.GetAll();
@@ -131,7 +131,7 @@ public static class ServicePet
                 $"ID: {pet.PetId}, Name: {pet.Name}, Species: {pet.Species}, Breed: {pet.Breed}, Gender: {pet.Gender}, BirthDay: {pet.BirthDay}");
         }
     }
-
+    //Show Pet by ID
     public static void GetPetById(int id)
     {
         if (id <= 0)
@@ -152,6 +152,7 @@ public static class ServicePet
             $"ID: {pet.PetId}, Name: {pet.Name}, Species: {pet.Species}, Breed: {pet.Breed}, Gender: {pet.Gender}, BirthDay: {pet.BirthDay}");
     }
 
+    //update a pet
     public static void UpdatePet(int id)
     {
         try
@@ -239,7 +240,7 @@ public static class ServicePet
         }
     }
 
-
+    //Delete pet
     public static void DeletePet(int id)
     {
         if (id <= 0)

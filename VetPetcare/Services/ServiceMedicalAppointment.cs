@@ -8,6 +8,7 @@ public static class ServiceMedicalAppointment
     private static readonly VeterinaryRepository _veterinaryRepository = new();
     private static readonly ClientRepository _clientRepository = new();
 
+    //Create appointment
     public static void ScheduleAppointment()
     {
         try
@@ -88,7 +89,7 @@ public static class ServiceMedicalAppointment
             }
 
             // ============================================
-            // ✅ Create appointment (no conflicts)
+            // Create appointment (no conflicts)
             // ============================================
             var appointment = new MedicalAppointment
             {
@@ -106,7 +107,7 @@ public static class ServiceMedicalAppointment
             // Add appointment to the dictionary
             Database.Database.MedicalAppointment.Add(appointment.AppointmentId, appointment);
 
-            Console.WriteLine("\n✅ Appointment successfully scheduled!");
+            Console.WriteLine("\n Appointment successfully scheduled!");
             Console.WriteLine("========================================");
             Console.WriteLine($"Date: {appointment.Date}");
             Console.WriteLine($"Time: {chosenSlot.Range}");
@@ -120,7 +121,7 @@ public static class ServiceMedicalAppointment
             Console.WriteLine($"Error scheduling appointment: {e.Message}");
         }
     }
-
+    //Show appointments
     public static void ShowAllAppointments()
     {
         var appointments = _repository.GetAll().ToList();
@@ -147,7 +148,7 @@ public static class ServiceMedicalAppointment
             Console.WriteLine("----------------------------------------");
         }
     }
-
+    //Show apoointment by Id
     public static void ShowAppointmentById(int id)
     {
         var appointment = _repository.GetById(id);
@@ -169,7 +170,7 @@ public static class ServiceMedicalAppointment
             $"Client: {appointment.Clients.FirstOrDefault()?.FirstName} {appointment.Clients.FirstOrDefault()?.LastName}");
         Console.WriteLine("----------------------------------------");
     }
-
+    //Update an appointment
     public static void UpdateAppointment(int id)
     {
         var existing = _repository.GetById(id);
@@ -195,7 +196,7 @@ public static class ServiceMedicalAppointment
         else
             Console.WriteLine("Error updating appointment.");
     }
-
+    //Delete appointment by ID
     public static void DeleteAppointment(int id)
     {
         bool success = _repository.DeleteById(id);
